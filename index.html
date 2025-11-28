@@ -67,8 +67,8 @@
     <script>
       window.onerror = function(message, source, lineno, colno, error) {
         const root = document.getElementById('root');
-        // Only show error if root is empty (app failed to load)
-        if (root) {
+        // Only show error if root is still showing the loader (app failed to load)
+        if (root && root.innerHTML.includes('loader')) {
            const errorDiv = document.createElement('div');
            errorDiv.style.padding = '20px';
            errorDiv.style.color = '#7f1d1d';
@@ -77,6 +77,8 @@
            errorDiv.style.borderRadius = '8px';
            errorDiv.style.fontFamily = 'monospace';
            errorDiv.style.border = '1px solid #f87171';
+           errorDiv.style.zIndex = '9999';
+           errorDiv.style.position = 'relative';
            errorDiv.innerHTML = '<h3 style="font-weight:bold; margin-bottom:8px">启动错误 (Application Error)</h3><p>' + message + '</p>';
            document.body.prepend(errorDiv);
         }
